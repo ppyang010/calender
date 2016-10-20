@@ -15,7 +15,9 @@
 
             addEvent(dom,"focus",function(){
                 console.dir(this);
-                var x=this.offsetTop
+                var x=pageX(this);
+                var y=pageY(this)+this.offsetHeight;
+                div.style.cssText='top:'+y+'px; left:'+x+'px;'
                 document.body.appendChild(div);
             });
             // addEvent(dom,"blur",function(){
@@ -24,10 +26,11 @@
         }
 
     }
+    //获取元素到左侧的距离
     function pageX(elem) {
       return elem.offsetParent ? elem.offsetLeft + pageX(elem.offsetParent) : elem.offsetLeft;
     }
-
+    //获取元素到顶部的距离
     function pageY(elem) {
       return elem.offsetParent ? elem.offsetTop + pageY(elem.offsetParent) : elem.offsetTop;
     }
