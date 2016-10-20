@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="demo/calender.css" media="screen" title="no title">
 </head>
 <body>
+    <input type="text" name="name" value="" id="cal">
 
-    <div>
-        <div>
+    <!-- <div class="module-calender" >
+        <div class="header">
             <select class="" name="">
                 <option value="2016">2016</option>
             </select>年
@@ -17,7 +19,8 @@
                 <option value="1">1</option>
             </select>月
         </div>
-        <table>
+
+        <table class="body">
             <thead>
                 <th>日</th>
                 <th>一</th>
@@ -37,44 +40,7 @@
                     <td>6</td>
                     <td>7</td>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
             </tbody>
-
             <tfoot>
                 <tr>
                     <td colspan="7">
@@ -86,7 +52,14 @@
 
             </tfoot>
         </table>
-    </div>
+    </div> -->
+<script type="text/javascript" src="demo/calender.js"></script>
 
+<script>
+    var  cal=new Calender({
+        domID:'cal'
+
+    });
+</script>
 </body>
 </html>
