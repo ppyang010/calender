@@ -1,0 +1,15 @@
+.module-calender{
+    position: absolute;
+    width: 200px;
+    border: 1px solid red;
+}
+
+.module-calender .body{
+    margin: 0 auto;
+    border: 1px solid red;
+}
+.module-calender .body td{
+    border: 1px solid red;
+    text-align: center;
+    vertical-align: middle;
+}
