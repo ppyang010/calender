@@ -4,12 +4,15 @@
     border: 1px solid red;
 }
 
-.module-calender .body{
+.module-calender .container{
     margin: 0 auto;
     border: 1px solid red;
 }
-.module-calender .body td{
+.module-calender .container td{
     border: 1px solid red;
     text-align: center;
     vertical-align: middle;
+}
+.module-calender .container td.selected{
+    color:blue;
 }
