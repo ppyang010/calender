@@ -1,3 +1,4 @@
+/*//tablebody部分*/
 .module-calender{
     position: absolute;
     width: 200px;
@@ -6,13 +7,41 @@
 
 .module-calender .container{
     margin: 0 auto;
-    border: 1px solid red;
+    border-right:1px solid #F00;
+    border-bottom:1px solid #F00
 }
 .module-calender .container td{
-    border: 1px solid red;
+    padding: 0;
     text-align: center;
+    border-top:1px solid #F00;
+    border-left:1px solid #F00;
     vertical-align: middle;
 }
-.module-calender .container td.selected{
+.module-calender .container .calendar-day{
+    cursor: pointer;
+}
+.module-calender .container .calendar-day:hover{
+    background-color: #0021ff;
+    color: #ffffff;
+}
+/*选中的样式*/
+.module-calender .container .calendar-selected{
     color:blue;
+}
+/*被点击的样式*/
+.module-calender .container .calendar-clicked{
+    background-color: #0021ff;
+    color: #ffffff;
+}
+
+
+
+
+
+.module-calender .container .calendar-day a:hover{
+    color:#ffffff;
+}
+.module-calender .container .calendar-day a{
+    text-decoration: none;
+    color: #000000;
 }

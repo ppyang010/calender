@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="demo/calender.css" media="screen" title="no title">
 </head>
 <body>
-    <input type="text" name="name" value="" id="cal">
-
+    <input type="text" name="name"  id="cal" value="2015-10-21" >
+    <!-- <span class="year">2016</span>年<span class="month">10</span>月 -->
     <!-- <div class="module-calender" >
         <div class="header">
             <select class="" name="">
@@ -41,7 +41,8 @@
 
 <script>
     var  cal=new Calender({
-        domID:'cal'
+        domID:'cal',
+        pattern:"yyyy-MM-dd"
     });
     //cal.setTime();
 </script>
