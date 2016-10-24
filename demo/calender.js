@@ -20,6 +20,7 @@
             addEvent(dom,"focus",function(){//显示事件
                 var value=this.value;
                 _self._options.date =_self._valDate(value)||new Date();//根据input值设置选中的日期 input为空则使用今天
+                _self._options.showDate =_self._valDate(value)||new Date();;//设置显示日期  用于年月切换
                 _self._dateHtmlInit(div,_self._options.date);//生成日期HTML
                 // console.dir(value);
                 var x=pageX(this);
@@ -48,7 +49,7 @@
         _dateHtmlInit:function(div,selectDate){
             var _self=this;
             var tbody=div.getElementsByTagName("tbody")[0];
-            var header=div.getElementsByClassName("calendar-header")[0];
+            var header=div.getElementsByClassName("calendar-date")[0];
             var now=selectDate|| new Date();
             var month=now.getMonth()+1;//选中日期所在月份
             var year=now.getFullYear();//选中日期所在年份
@@ -58,11 +59,42 @@
             var firstDay=new Date(year,month,1).getDay();//选中日期所在月份第一天的星期数
             var lastDay=new Date(year,month,days).getDay();//选中日期所在月份最后一天的星期数
             tbody.innerHTML="";//清空
-            header.innerHTML='<span class="calendar-year">'+year+'</span>年<span class="calendar-month">'+month+'</span>月'
+            header.innerHTML='<span class="calendar-year">'+year+'</span>-<span class="calendar-month">'+month+'</span>';
             //第一行
             var _days=_self._addRow(firstDay,1,days,day,tbody);
             while(_days<=days){
                 _days=_self._addRow(0,_days,days,day,tbody);
+            }
+
+        },
+        //渲染日历html
+        _renderDateHtml:function(div,showDate,selectDate){
+            var _self=this;
+            var tbody=div.getElementsByTagName("tbody")[0];
+            var header=div.getElementsByClassName("calendar-date")[0];
+            var now=showDate|| new Date();
+            var month=now.getMonth()+1;//显示日期所在月份
+            var year=now.getFullYear();//显示日期所在年份
+            var days=(new Date(year,month,0)).getDate();//显示日期所在月份天数
+            var lastMonthDays=new Date(year,month-1,0).getDate();//上个月天数
+            var firstDay=new Date(year,month,1).getDay();//显示日期所在月份第一天的星期数
+            var lastDay=new Date(year,month,days).getDay();//显示日期所在月份最后一天的星期数
+
+            var day=selectDate.getDate();//选中日期的日期数
+            tbody.innerHTML="";//清空
+            header.innerHTML='<span class="calendar-year">'+year+'</span>-<span class="calendar-month">'+month+'</span>';
+            console.log(selectDate==showDate);
+            if(selectDate==showDate){
+                //第一行
+                var _days=_self._addRow(firstDay,1,days,day,tbody);
+                while(_days<=days){
+                    _days=_self._addRow(0,_days,days,day,tbody);
+                }
+            }else{
+                var _days=_self._addRow(firstDay,1,days,0,tbody);
+                while(_days<=days){
+                    _days=_self._addRow(0,_days,days,0,tbody);
+                }
             }
 
         },
@@ -99,10 +131,13 @@
         //按钮点击事件初始化
         _buttonInit:function (dom) {
             var _self=this;//实例
-
             var todayBtn=dom.getElementsByClassName("todayBtn")[0];//今天按钮
             var cancelBtn=dom.getElementsByClassName("cancelBtn")[0];//取消按钮
             var confirmBtn=dom.getElementsByClassName("confirmBtn")[0];//确认按钮
+            var prevYearBtn=dom.getElementsByClassName("calendar-prevyear")[0];//上一年按钮
+            var prevMonthBtn=dom.getElementsByClassName("calendar-prevmonth")[0];//上一月按钮
+            var nextYearBtn=dom.getElementsByClassName("calendar-nextyear")[0];//下一年按钮
+            var nextMonthBtn=dom.getElementsByClassName("calendar-nextmonth")[0];//下一月按钮
             todayBtn.onclick=function(){
                 _self._options.date=new Date();
                 var val=formatDate(_self._options.date, _self._options.pattern);
@@ -117,8 +152,31 @@
                 _self._options.dom.value=val;
                 cancelBtn.onclick();
             };
+
+            prevYearBtn.onclick=function(){
+                var showDate=_self._options.showDate;//显示日期
+                showDate.setFullYear(showDate.getFullYear()-1);
+                _self._renderDateHtml(dom,showDate,_self._options.date);
+            };
+            prevMonthBtn.onclick=function(){
+                var showDate=_self._options.showDate;//显示日期
+                showDate.setMonth(showDate.getMonth()-1);
+                _self._renderDateHtml(dom,showDate,_self._options.date);
+            };
+            nextYearBtn.onclick=function(){
+                var showDate=_self._options.showDate;//显示日期
+                showDate.setFullYear(showDate.getFullYear()+1);
+                _self._renderDateHtml(dom,showDate,_self._options.date);
+            };
+            nextMonthBtn.onclick=function(){
+                var showDate=_self._options.showDate;//显示日期
+                showDate.setMonth(showDate.getMonth()+1);
+                _self._renderDateHtml(dom,showDate,_self._options.date);
+            };
+
+
         },
-        //验证输入框中的data格式
+        //验证输入框中的data格式 并转换成日期对象
         _valDate:function(value){
             var dateP=/((^((1[8-9]\d{2})|([2-9]\d{3}))([-\/\._])(10|12|0?[13578])([-\/\._])(3[01]|[12][0-9]|0?[1-9])$)|(^((1[8-9]\d{2})|([2-9]\d{3}))([-\/\._])(11|0?[469])([-\/\._])(30|[12][0-9]|0?[1-9])$)|(^((1[8-9]\d{2})|([2-9]\d{3}))([-\/\._])(0?2)([-\/\._])(2[0-8]|1[0-9]|0?[1-9])$)|(^([2468][048]00)([-\/\._])(0?2)([-\/\._])(29)$)|(^([3579][26]00)([-\/\._])(0?2)([-\/\._])(29)$)|(^([1][89][0][48])([-\/\._])(0?2)([-\/\._])(29)$)|(^([2-9][0-9][0][48])([-\/\._])(0?2)([-\/\._])(29)$)|(^([1][89][2468][048])([-\/\._])(0?2)([-\/\._])(29)$)|(^([2-9][0-9][2468][048])([-\/\._])(0?2)([-\/\._])(29)$)|(^([1][89][13579][26])([-\/\._])(0?2)([-\/\._])(29)$)|(^([2-9][0-9][13579][26])([-\/\._])(0?2)([-\/\._])(29)$))/;
             var flag=value.match(dateP);
@@ -147,9 +205,9 @@
     function pageY(elem) {
       return elem.offsetParent ? elem.offsetTop + pageY(elem.offsetParent) : elem.offsetTop;
     }
-
-    var template='<div class="module-calender"> \
-        <div class="calendar-header"><p class="calendar-date"></p></div>\
+    //模版
+    var template='<div class="module-calendar"> \
+        <div class="calendar-header"><i class="calendar-nav calendar-prevyear"></i><i class="calendar-nav calendar-prevmonth"></i><p class="calendar-date"></p><i class="calendar-nav calendar-nextmonth"></i><i class="calendar-nav calendar-nextyear"></i></div>\
         <table class="container"  border="0" cellspacing="0" cellpadding="0">\
         <thead><th>日</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th></thead>\
         <tbody></tbody>\
@@ -157,8 +215,7 @@
         </table>\
     </div>\
     ';
- //     var template=
- // '<div class="modal" style="display: block"></div>';
+
     function html2node(str){
         var div=document.createElement('div');
         div.innerHTML=str;
