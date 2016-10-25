@@ -101,7 +101,7 @@
         //添加日历行  开始星期数(从0开始) 开始日期数(这一行从哪个日期开始) 该月最大天数数 选中日期的日期值  tbody
         _addRow:function(startDay,date,maxDays,selectDate,dom){
             var _self=this;//cal实例
-            var tr=newRow();
+            var tr=newRow(7);
             var tds=tr.getElementsByTagName("td");
             for(var i=startDay;i<7;i++){
                 if(date>maxDays){
@@ -138,6 +138,9 @@
             var prevMonthBtn=dom.getElementsByClassName("calendar-prevmonth")[0];//上一月按钮
             var nextYearBtn=dom.getElementsByClassName("calendar-nextyear")[0];//下一年按钮
             var nextMonthBtn=dom.getElementsByClassName("calendar-nextmonth")[0];//下一月按钮
+            //菜单界面按钮
+            var calendarDateBtn=dom.getElementsByClassName("calendar-date")[0];//月份菜单按钮
+
             todayBtn.onclick=function(){
                 _self._options.date=new Date();
                 var val=formatDate(_self._options.date, _self._options.pattern);
@@ -173,7 +176,20 @@
                 showDate.setMonth(showDate.getMonth()+1);
                 _self._renderDateHtml(dom,showDate,_self._options.date);
             };
+            calendarDateBtn.onclick=function(){
+                var dtable=_self._options.div.getElementsByClassName("calendar-dtable")[0];
+                var menu=_self._options.div.getElementsByClassName("calendar-menu")[0];
+                console.log(dtable.style.display);
+                if(dtable.style.display=="none"){
+                    dtable.style.display="table";
+                    menu.style.display="none";
+                }else{
+                    dtable.style.display="none";
+                    menu.style.display="block";
+                    _self._addMtableTbody();
+                }
 
+            }
 
         },
         //验证输入框中的data格式 并转换成日期对象
@@ -187,6 +203,49 @@
                 console.log(strs[1]);
                 return new Date(strs[0],strs[1]-1,strs[2]);
             }
+        },
+        //添加MtableTbody月份内容
+        _addMtableTbody:function(){
+            var _self=this;//cal实例
+            var div=_self._options.div;
+            var dom=div.getElementsByTagName("tbody")[1];
+            dom.innerHTML="";
+            var yearInput=div.getElementsByClassName("calender-menu-year")[0];
+            var showDate=_self._options.showDate;
+            var showMonth=showDate.getMonth()+1;
+            var showYear=showDate.getFullYear();
+            yearInput.value=showYear;
+            var tr=newRow(4);
+            var tds=tr.getElementsByTagName("td");
+            var m=1;
+            while(m<12){
+                var tr=newRow(4);
+                var tds=tr.getElementsByTagName("td");
+                for(var i=0,len=tds.length;i<len;i++){
+                    tds[i].innerText=m;
+                    if(showMonth!=m){
+                        tds[i].className="calendar-day";
+                    }else{
+                        if(yearInput.value==showYear){
+                            tds[i].className="calendar-day calendar-selected";
+                        }
+                    }
+                    addEvent(tds[i],"click",function(){
+                        var doms=dom.getElementsByClassName("calendar-clicked");
+                        var month=this.innerText;
+                        var year=yearInput.value;
+                        setClass(doms,"calendar-day");
+                        this.className="calendar-day calendar-clicked";
+                        _self._options.showDate=new Date(year,month-1);
+                        div.getElementsByClassName("calendar-date")[0].onclick();
+                        console.dir(_self);
+                        _self._renderDateHtml(div,_self._options.showDate,_self._options.date);
+
+                    });
+                    m++;
+                }
+                dom.appendChild(tr);
+            };
         }
 
 
@@ -208,11 +267,17 @@
     //模版
     var template='<div class="module-calendar"> \
         <div class="calendar-header"><i class="calendar-nav calendar-prevyear"></i><i class="calendar-nav calendar-prevmonth"></i><p class="calendar-date"></p><i class="calendar-nav calendar-nextmonth"></i><i class="calendar-nav calendar-nextyear"></i></div>\
-        <table class="container"  border="0" cellspacing="0" cellpadding="0">\
+        <div class="calendar-body"><table class="calendar-dtable"  border="0" cellspacing="0" cellpadding="0" >\
         <thead><th>日</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th></thead>\
         <tbody></tbody>\
-        <tfoot><tr><td colspan="7"><button class="confirmBtn">确定</button><button class="todayBtn">今天</button><button class="cancelBtn">取消</button></td></tr></tfoot>\
         </table>\
+        <div class="calendar-menu" style="display:none"><div class="calender-menu-year-wrap"><i class="calendar-nav calendar-menu-prevyear"></i><input type="text" class="calender-menu-year"><i class="calendar-nav calendar-menu-nextyear"></i></div>\
+        <table class="calendar-mtable"  border="0" cellspacing="0" cellpadding="0"  >\
+        <tbody></tbody>\
+        </table>\
+        </div>\
+        </div>\
+        <div class="calendar-footer"><button class="confirmBtn">确定</button><button class="todayBtn">今天</button><button class="cancelBtn">取消</button></div>\
     </div>\
     ';
 
@@ -241,9 +306,9 @@
         return obj===pare? true :isExist(obj.parentElement,pare);
     }
     //创建新的一行
-    function newRow(){
+    function newRow(num){
         var tr=document.createElement('tr');
-        for(var i=0;i<7;i++){
+        for(var i=0;i<num;i++){
             var td=document.createElement("td");
             tr.appendChild(td);
         }
