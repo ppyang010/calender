@@ -2,6 +2,12 @@
     position: absolute;
     width: 180px;
     border: 1px solid #95B8E7;
+    -moz-user-select: none;
+    -o-user-select:none;
+    -khtml-user-select:none;
+    -webkit-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 }
 .module-calendar  .calendar-nav{
     position: absolute;
@@ -96,6 +102,7 @@
 }
 /*tbody部分 end*/
 
+
 /*menu start*/
 .module-calendar .calendar-menu{
     position: relative;
@@ -117,28 +124,31 @@
 
 .module-calendar .calendar-mtable{
     margin: 0 auto;
-    border-right:1px solid #F00;
-    border-bottom:1px solid #F00
 }
 .module-calendar .calendar-mtable td{
     padding: 0;
+    border-radius: 3px;
+    box-sizing: border-box;
     width: 40px;
     height: 40px;
     text-align: center;
-    border-top:1px solid #F00;
-    border-left:1px solid #F00;
     vertical-align: middle;
 }
 .module-calendar .calendar-mtable .calendar-day{
     cursor: pointer;
 }
 .module-calendar .calendar-mtable .calendar-day:hover{
-    background-color: #0021ff;
-    color: #ffffff;
+    padding: 0;
+    border: 1px solid #ffab3f;
+    color: #000000;
 }
 /*选中的样式*/
 .module-calendar .calendar-mtable .calendar-selected{
-    color:blue;
+    padding: 0;
+    border: 1px solid #ffab3f;
+    border-radius: 3px;
+    color: #ff0000;
+    background-color: #ffe48d;
 }
 /*被点击的样式*/
 .module-calendar .calendar-mtable .calendar-clicked{
