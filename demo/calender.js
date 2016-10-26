@@ -180,12 +180,15 @@
             calendarDateBtn.onclick=function(){
                 var dtable=_self._options.div.getElementsByClassName("calendar-dtable")[0];
                 var menu=_self._options.div.getElementsByClassName("calendar-menu")[0];
+                var footer=_self._options.div.getElementsByClassName("calendar-footer")[0];
                 console.log(dtable.style.display);
                 if(dtable.style.display=="none"){
                     dtable.style.display="table";
                     menu.style.display="none";
+                    footer.style.display="block"
                 }else{
                     dtable.style.display="none";
+                    footer.style.display="none";
                     menu.style.display="block";
                     _self._addMtableTbody();
                 }
@@ -324,6 +327,7 @@
     }
     //格式化时间
     function formatDate(date,pattern){
+        var pattern=pattern||"yyyy-MM-dd";
         var paramDate = date
         var hours = chang(paramDate.getHours());
         var minutes = chang(paramDate.getMinutes());

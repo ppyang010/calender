@@ -1,7 +1,7 @@
 .module-calendar{
     position: absolute;
-    width: 200px;
-    border: 1px solid red;
+    width: 180px;
+    border: 1px solid #95B8E7;
 }
 .module-calendar  .calendar-nav{
     position: absolute;
@@ -15,6 +15,7 @@
 .module-calendar .calendar-header{
     position: relative;
     text-align: center;
+    background: #E0ECFF;
 }
 .module-calendar .calendar-header .calendar-date{
     display: inline-block;
@@ -30,7 +31,7 @@
     background-position: -1px -2px;
 }
 .module-calendar .calendar-header .calendar-prevmonth{
-    left: 20px;
+    left: 25px;
     background-position: -18px -2px;
 }
 .module-calendar .calendar-header .calendar-nextyear{
@@ -40,45 +41,58 @@
 }
 .module-calendar .calendar-header .calendar-nextmonth{
     top:0;
-    right: 20px;
+    right: 25px;
     background-position: -34px -2px;
 }
 /*calendar-header end*/
 
 
 
-/*tbody部分 start*/
+/*table部分 start*/
 
 
 .module-calendar .calendar-dtable{
     margin: 0 auto;
-    border-right:1px solid #F00;
-    border-bottom:1px solid #F00
+    width: 100%;
+    box-sizing: border-box;
+
+}
+.module-calendar .calendar-dtable th{
+    background: #F4F4F4;
+    padding: 2px 0;
 }
 .module-calendar .calendar-dtable td{
     padding: 0;
     width: 20px;
     height: 20px;
+    border-radius: 3px;
+    box-sizing: border-box;
     text-align: center;
-    border-top:1px solid #F00;
-    border-left:1px solid #F00;
     vertical-align: middle;
 }
 .module-calendar .calendar-dtable .calendar-day{
     cursor: pointer;
 }
 .module-calendar .calendar-dtable .calendar-day:hover{
-    background-color: #0021ff;
-    color: #ffffff;
+    /*color: #ffffff;
+    background-color: #0021ff;*/
+    padding: 0;
+    border: 1px solid #ffab3f;
+    color: #000000;
 }
 /*选中的样式*/
 .module-calendar .calendar-dtable .calendar-selected{
-    color:blue;
+    padding: 0;
+    border: 1px solid #ffab3f;
+    border-radius: 3px;
+    color: #ff0000;
+    background-color: #ffe48d;
 }
 /*被点击的样式*/
 .module-calendar .calendar-dtable .calendar-clicked{
-    background-color: #0021ff;
-    color: #ffffff;
+    padding: 0;
+    border: 1px solid #ffab3f;
+    color: #000000;
 }
 /*tbody部分 end*/
 
@@ -135,17 +149,6 @@
 
 /*footer*/
 .module-calendar .calendar-footer{
+    background-color: #F4F4F4;
     text-align: center;
-}
-
-
-
-
-
-.module-calendar .container .calendar-day a:hover{
-    color:#ffffff;
-}
-.module-calendar .container .calendar-day a{
-    text-decoration: none;
-    color: #000000;
 }
