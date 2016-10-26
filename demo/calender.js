@@ -140,7 +140,8 @@
             var nextMonthBtn=dom.getElementsByClassName("calendar-nextmonth")[0];//下一月按钮
             //菜单界面按钮
             var calendarDateBtn=dom.getElementsByClassName("calendar-date")[0];//月份菜单按钮
-
+            var prevYearBtn_menu=dom.getElementsByClassName("calendar-menu-prevyear")[0];//上一年按钮
+            var nextYearBtn_menu=dom.getElementsByClassName("calendar-menu-nextyear")[0];//下一年按钮
             todayBtn.onclick=function(){
                 _self._options.date=new Date();
                 var val=formatDate(_self._options.date, _self._options.pattern);
@@ -188,8 +189,15 @@
                     menu.style.display="block";
                     _self._addMtableTbody();
                 }
-
-            }
+            };
+            prevYearBtn_menu.onclick=function(){
+                var input=_self._options.div.getElementsByClassName("calender-menu-year")[0];
+                input.value=(+input.value)-1;
+            };
+            nextYearBtn_menu.onclick=function(){
+                var input=_self._options.div.getElementsByClassName("calender-menu-year")[0];
+                input.value=(+input.value)+1;
+            };
 
         },
         //验证输入框中的data格式 并转换成日期对象
