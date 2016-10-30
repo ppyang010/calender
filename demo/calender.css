@@ -1,0 +1,164 @@
+.module-calendar{
+    position: absolute;
+    width: 180px;
+    border: 1px solid #95B8E7;
+    -moz-user-select: none;
+    -o-user-select:none;
+    -khtml-user-select:none;
+    -webkit-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+.module-calendar  .calendar-nav{
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: url('img/calendar_arrows.png') no-repeat;
+    cursor: pointer;
+}
+
+/*calendar-header start*/
+.module-calendar .calendar-header{
+    position: relative;
+    text-align: center;
+    background: #E0ECFF;
+}
+.module-calendar .calendar-header .calendar-date{
+    display: inline-block;
+    margin: 0;
+    cursor: pointer;
+}
+.module-calendar .calendar-header .calendar-date:hover{
+    color: red;
+}
+
+.module-calendar .calendar-header .calendar-prevyear{
+    left: 5px;
+    background-position: -1px -2px;
+}
+.module-calendar .calendar-header .calendar-prevmonth{
+    left: 25px;
+    background-position: -18px -2px;
+}
+.module-calendar .calendar-header .calendar-nextyear{
+    top:0;
+    right: 5px;
+    background-position: -49px -2px;
+}
+.module-calendar .calendar-header .calendar-nextmonth{
+    top:0;
+    right: 25px;
+    background-position: -34px -2px;
+}
+/*calendar-header end*/
+
+
+
+/*table部分 start*/
+
+
+.module-calendar .calendar-dtable{
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+
+}
+.module-calendar .calendar-dtable th{
+    background: #F4F4F4;
+    padding: 2px 0;
+}
+.module-calendar .calendar-dtable td{
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    box-sizing: border-box;
+    text-align: center;
+    vertical-align: middle;
+}
+.module-calendar .calendar-dtable .calendar-day{
+    cursor: pointer;
+}
+.module-calendar .calendar-dtable .calendar-day:hover{
+    /*color: #ffffff;
+    background-color: #0021ff;*/
+    padding: 0;
+    border: 1px solid #ffab3f;
+    color: #000000;
+}
+/*选中的样式*/
+.module-calendar .calendar-dtable .calendar-selected{
+    padding: 0;
+    border: 1px solid #ffab3f;
+    border-radius: 3px;
+    color: #ff0000;
+    background-color: #ffe48d;
+}
+/*被点击的样式*/
+.module-calendar .calendar-dtable .calendar-clicked{
+    padding: 0;
+    border: 1px solid #ffab3f;
+    color: #000000;
+}
+/*tbody部分 end*/
+
+
+/*menu start*/
+.module-calendar .calendar-menu{
+    position: relative;
+    text-align: center;
+}
+.module-calendar .calendar-menu .calender-menu-year{
+    width: 40px;
+}
+.module-calendar .calendar-menu .calendar-menu-prevyear{
+    top:3px;
+    left: 25%;
+    background-position: -1px -2px;
+}
+.module-calendar .calendar-menu .calendar-menu-nextyear{
+    top:3px;
+    right: 25%;
+    background-position: -49px -2px;
+}
+
+.module-calendar .calendar-mtable{
+    margin: 0 auto;
+}
+.module-calendar .calendar-mtable td{
+    padding: 0;
+    border-radius: 3px;
+    box-sizing: border-box;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+}
+.module-calendar .calendar-mtable .calendar-day{
+    cursor: pointer;
+}
+.module-calendar .calendar-mtable .calendar-day:hover{
+    padding: 0;
+    border: 1px solid #ffab3f;
+    color: #000000;
+}
+/*选中的样式*/
+.module-calendar .calendar-mtable .calendar-selected{
+    padding: 0;
+    border: 1px solid #ffab3f;
+    border-radius: 3px;
+    color: #ff0000;
+    background-color: #ffe48d;
+}
+/*被点击的样式*/
+.module-calendar .calendar-mtable .calendar-clicked{
+    background-color: #0021ff;
+    color: #ffffff;
+}
+/*menu end*/
+
+/*footer*/
+.module-calendar .calendar-footer{
+    background-color: #F4F4F4;
+    text-align: center;
+}
